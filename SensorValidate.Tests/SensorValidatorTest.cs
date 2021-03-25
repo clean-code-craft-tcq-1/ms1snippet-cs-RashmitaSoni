@@ -12,14 +12,14 @@ namespace SensorValidate.Tests
         [Fact]
         public static void ReportsErrorWhenSOCJumps()
         {
-            Assert.True(SensorValidator.ValidateSensorMeasureReadings(
+            Assert.False(SensorValidator.ValidateSensorMeasureReadings(
                 new List<double> { 0.0, 0.01, 0.5, 0.51 }, socmaxdelta
             ));
         }
         [Fact]
         public static void ReportsErrorWhenCurrentJumps()
         {
-            Assert.True(SensorValidator.ValidateSensorMeasureReadings(
+            Assert.False(SensorValidator.ValidateSensorMeasureReadings(
                 new List<double> { 0.03, 0.03, 0.03, 0.33 }, currentmaxdelta
             ));
         }
