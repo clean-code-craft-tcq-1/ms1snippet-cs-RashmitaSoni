@@ -1,22 +1,40 @@
 using System;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 using Xunit;
 
 namespace SensorValidate.Tests
 {
-    public class SensorValidatorTest
+    public static class SensorValidatorTest
     {
+        static double socmaxdelta = 0.05;
+        static double currentmaxdelta = 0.1;
         [Fact]
-        public void reportsErrorWhenSOCjumps() {
-            Assert.False(SensorValidator.validateSOCreadings(
-                new List<double>{0.0, 0.01, 0.5, 0.51}
+        public static void ReportsErrorWhenSOCJumps()
+        {
+            Debug.Assert(SensorValidator.ValidateSensorMeasureReadings(
+                new List<double> { 0.0, 0.01, 0.5, 0.51 }, socmaxdelta
             ));
         }
         [Fact]
-        public void reportsErrorWhenCurrentjumps() {
-            Assert.False(SensorValidator.validateCurrentreadings(
-                new List<double>{0.03, 0.03, 0.03, 0.33}
+        public static void ReportsErrorWhenCurrentJumps()
+        {
+            Debug.Assert(SensorValidator.ValidateSensorMeasureReadings(
+                new List<double> { 0.03, 0.03, 0.03, 0.33 }, currentmaxdelta
+            ));
+        }
+        [Fact]
+        public static void ReportsErrorWhenSOCEmpty()
+        {
+            Debug.Assert(SensorValidator.ValidateSensorMeasureReadings(
+                new List<double> {}, socmaxdelta
+            ));
+        }
+        [Fact]
+        public static void ReportsErrorWhenCurrentEmpty()
+        {
+            Debug.Assert(SensorValidator.ValidateSensorMeasureReadings(
+                new List<double> {}, currentmaxdelta
             ));
         }
     }
