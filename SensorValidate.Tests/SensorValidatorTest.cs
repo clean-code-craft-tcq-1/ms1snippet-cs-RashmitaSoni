@@ -12,30 +12,30 @@ namespace SensorValidate.Tests
         [Fact]
         public static void ReportsErrorWhenSOCJumps()
         {
-            Debug.Assert(SensorValidator.ValidateSensorMeasureReadings(
+            Assert.True(SensorValidator.ValidateSensorMeasureReadings(
                 new List<double> { 0.0, 0.01, 0.5, 0.51 }, socmaxdelta
             ));
         }
         [Fact]
         public static void ReportsErrorWhenCurrentJumps()
         {
-            Debug.Assert(SensorValidator.ValidateSensorMeasureReadings(
+            Assert.True(SensorValidator.ValidateSensorMeasureReadings(
                 new List<double> { 0.03, 0.03, 0.03, 0.33 }, currentmaxdelta
             ));
         }
         [Fact]
         public static void ReportsErrorWhenSOCEmpty()
         {
-            Debug.Assert(SensorValidator.ValidateSensorMeasureReadings(
+            Assert.True(SensorValidator.ValidateSensorMeasureReadings(
                 new List<double> {}, socmaxdelta
             ));
         }
         [Fact]
         public static void ReportsErrorWhenCurrentEmpty()
         {
-            Debug.Assert(SensorValidator.ValidateSensorMeasureReadings(
+            Assert.True(SensorValidator.ValidateSensorMeasureReadings(
                 new List<double> {}, currentmaxdelta
             ));
         }
-    }
+    } 
 }
