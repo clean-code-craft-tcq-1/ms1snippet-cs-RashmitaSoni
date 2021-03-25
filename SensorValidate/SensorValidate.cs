@@ -9,17 +9,21 @@ namespace SensorValidate
         {
             if (!IsSensorReadingsListEmpty(values))
             {
-                int lastButOneIndex = values.Count - 1;
-                for (int i = 0; i < lastButOneIndex; i++)
-                {
-                    if (!IsValidSensorMeasureReading(values[i], values[i + 1], maxDelta))
-                    {
-                        return false;
-                    }
-                }
-                return true;
+                return CheckSensorMeasureReadings(values,maxDelta);
             }
             return false;
+        }
+        public static bool CheckSensorMeasureReadings(List<Double> values, double maxDelta)
+        {
+            int lastButOneIndex = values.Count - 1;
+            for (int i = 0; i < lastButOneIndex; i++)
+            {
+                if (!IsValidSensorMeasureReading(values[i], values[i + 1], maxDelta))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
         public static bool IsValidSensorMeasureReading(double value, double nextValue, double maxDelta)
         {
