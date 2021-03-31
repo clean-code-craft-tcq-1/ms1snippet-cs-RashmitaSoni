@@ -1,33 +1,37 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace SensorValidate
-{
+{ 
     public class SensorValidator
     {
-        public static bool _give_me_a_good_name(double value, double nextValue, double maxDelta) {
-            if(nextValue - value > maxDelta) {
-                return false;
+        public static bool ValidateSensorMeasureReadings(List<Double> values, double maxDelta)
+        {
+            if (!IsSensorReadingsListEmpty(values))
+            {
+                return CheckSensorMeasureReadings(values,maxDelta);
             }
-            return true;
+            return false;
         }
-        public static bool validateSOCreadings(List<Double> values) {
+        public static bool CheckSensorMeasureReadings(List<Double> values, double maxDelta)
+        {
             int lastButOneIndex = values.Count - 1;
-            for(int i = 0; i < lastButOneIndex; i++) {
-                if(!_give_me_a_good_name(values[i], values[i + 1], 0.05)) {
+            for (int i = 0; i < lastButOneIndex; i++)
+            {
+                if (IsDifferenceInValueGreaterThanMaxdelta(values[i], values[i + 1], maxDelta))
+                {
                     return false;
                 }
             }
             return true;
         }
-        public static bool validateCurrentreadings(List<Double> values) {
-            int lastButOneIndex = values.Count - 1;
-            for(int i = 0; i < lastButOneIndex; i++) {
-                if(!_give_me_a_good_name(values[i], values[i + 1], 0.1)) {
-                    return false;
-                }
-            }
-            return true;
+        public static bool IsDifferenceInValueGreaterThanMaxdelta(double value, double nextValue, double maxDelta)
+        {
+            return (nextValue - value > maxDelta) ? true : false;
+        }
+        public static bool IsSensorReadingsListEmpty(List<Double> values)
+        {
+            return (values == null) ? true : false;
         }
     }
 }
