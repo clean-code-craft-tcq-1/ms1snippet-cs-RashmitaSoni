@@ -27,14 +27,14 @@ namespace SensorValidate.Tests
         public static void ReportsErrorWhenSOCEmpty()
         {
             Assert.True(SensorValidator.ValidateSensorMeasureReadings(
-                new List<double> {}, socmaxdelta
+                new List<double> { }, socmaxdelta
             ));
         }
         [Fact]
         public static void ReportsErrorWhenCurrentEmpty()
         {
             Assert.True(SensorValidator.ValidateSensorMeasureReadings(
-                new List<double> {}, currentmaxdelta
+                new List<double> { }, currentmaxdelta
             ));
         }
     } 
